@@ -103,6 +103,8 @@ font_text.place(x=195, y=30, width=20, height=70)
 
 font_text.insert('insert', '14') #默认字号 | Default font size
 wm_text.insert('insert', 'BiliBili_BHznJNs') #默认文本 | Default text
+# 点击鼠标中键后显示水印 | Display the watermark when the Middle Mouse Button is pressed
+window.bind('<Button-2>', lambda event : create_())
 # 右键点击删除text文本框中文本 | Press the right key to clear the Text
 wm_text.bind('<Button-3>', lambda event:wm_text.delete('0.0', 'end'))
 # 点击关闭按钮时终止整个程序 | Press the close key to over the process
