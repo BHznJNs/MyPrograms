@@ -1,5 +1,5 @@
 import tkinter as tk
-import random, sys
+from random import randint 
 
 window = tk.Tk()
 screenwidth, screenheight = window.winfo_screenwidth(), window.winfo_screenheight()#获取当前屏幕分辨率
@@ -9,12 +9,12 @@ window.geometry('245x100+{}+{}'.format(place_x, place_y))
 window.title('硬核水印')
 window.resizable(0, 0)
 
-# numbers = '1234567890'
 def create_() : #创建水印窗口 | Create the window for watermark
     window.state('icon') #创建水印后原窗口自动最小化 | Make window to be minimized after thewatermark is created
     global watermark
     global max_x, max_y
-    
+    global pos_x, pos_y
+
     try : #确保不会出现多个水印窗口 | Prevent to make several watermark
         watermark.destroy()
     except :
@@ -40,10 +40,12 @@ def create_() : #创建水印窗口 | Create the window for watermark
     
     max_x, max_y = screenwidth-int(wm_width), screenheight-int(wm_height)
 
-    watermark.after(int(50/3), wm_move) #开始刷新水印位置，每秒62.5次 | Start refresh the position of the watermark 62.5 times each second
+    pos_x, pos_y = randint(0, max_x), randint(0, max_y)
+
+    watermark.after(0, wm_move) #开始刷新水印位置，每秒62.5次 | Start refresh the position of the watermark 62.5 times each second
+    
     watermark.mainloop()
 
-pos_x, pos_y = 1, 1
 def wm_move() : #控制水印移动 | Control the watermark to move
     global pos_x, pos_y
     
@@ -65,7 +67,7 @@ def control_(x) : #防止changed变量数值过大 | Prevent the 'changed' var t
 changed_x, changed_y = 0, 0
 def pos_change(pos, max_, var) : #控制水印移动坐标 | Control the position of the watermark
     global changed_x, changed_y
-    if pos == max_ or pos == 0 :
+    if pos == max_ or pos < 0 :
         if var == 'x' :
             changed_x = control_(changed_x)
         else :
@@ -104,6 +106,6 @@ wm_text.insert('insert', 'BiliBili_BHznJNs') #默认文本 | Default text
 # 右键点击删除text文本框中文本 | Press the right key to clear the Text
 wm_text.bind('<Button-3>', lambda event:wm_text.delete('0.0', 'end'))
 # 点击关闭按钮时终止整个程序 | Press the close key to over the process
-window.protocol('WM_DELETE_WINDOW', sys.exit) 
+window.protocol('WM_DELETE_WINDOW', exit) 
 
 window.mainloop()
