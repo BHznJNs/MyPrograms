@@ -216,31 +216,31 @@ def setting_():  # 设置界面 | Setting GUI
     win_set.title('设置')
     win_x, win_y = int(screenwidth/2)-100, int(screenheight/2)-200
     win_set.geometry('200x280+{}+{}'.format(win_x, win_y))
-#	放置控件 | Put widgets
+#   放置控件 | Put widgets
     tk.Label(win_set, text='文字颜色', font=('normal', 14), bg='white').place(
         x=0, y=0, relheight=0.12, relwidth=0.4)
     fc_text = tk.Text(win_set, font=('normal', 14))
     fc_text.place(relx=0.4, y=0, relwidth=0.6, relheight=0.12)
     fc_text.insert('insert', fontcolor)
-#	填充颜色设置 | Widget to set filled color
+#   填充颜色设置 | Widget to set filled color
     tk.Label(win_set, text='填充颜色', font=('normal', 14), bg='white').place(
         relx=0.02, rely=0.14, relwidth=0.47, relheight=0.1)
     fill_text = tk.Text(win_set, font=('normal', 14))
     fill_text.place(relx=0.02, rely=0.24, relwidth=0.47, relheight=0.12)
     fill_text.insert('insert', fillcolor)
-#	背景颜色设置 | Widget to set background color
+#   背景颜色设置 | Widget to set background color
     tk.Label(win_set, text='背景颜色', font=('normal', 14), bg='white').place(
         relx=0.51, rely=0.14, relwidth=0.47, relheight=0.1)
     bgcolor_text = tk.Text(win_set, font=('normal', 14))
     bgcolor_text.place(relx=0.51, rely=0.24, relwidth=0.47, relheight=0.12)
     bgcolor_text.insert('insert', bgcolor)
-#	字体选择控件 | Widget to set fontstyle
+#   字体选择控件 | Widget to set fontstyle
     tk.Label(win_set, text='字体', font=('normal', 14), bg='white').place(
         relx=0.02, rely=0.37, relheight=0.12)
     fs_text = tk.Text(win_set, font=('normal', 14))
     fs_text.place(relx=0.25, rely=0.37, relwidth=0.73, relheight=0.12)
     fs_text.insert('insert', fontstyle)
-#	默认文字设置 | Widget to set default text
+#   默认文字设置 | Widget to set default text
     tk.Label(win_set, text='默认\n文字', bg='white', font=('normal', 14)).place(
         relx=0.02, rely=0.48)
     de_text = tk.Text(win_set, font=('normal', 14))
@@ -249,7 +249,7 @@ def setting_():  # 设置界面 | Setting GUI
 
     tk.Label(win_set, bg='black').place(  # 分割线 | Separator
         relx=0.02, rely=0.48, relwidth=0.21, relheight=0.005)
-#	显示模式选择控件 | Widget to select display mode
+#   显示模式选择控件 | Widget to select display mode
     tk.Label(win_set, text='显示\n模式', font=('normal', 14), bg='white').place(
         relx=0.02, rely=0.65)
     wm_mode_com = Combobox(win_set, font=('normal', 14))
@@ -261,7 +261,7 @@ def setting_():  # 设置界面 | Setting GUI
 
     tk.Label(win_set, bg='black').place(  # 分割线 | Separator
         relx=0.02, rely=0.655, relwidth=0.21, relheight=0.005)
-#	保存设置函数 | A function to save settings
+#   保存设置函数 | A function to save settings
     def save_():
         fontcolor = fc_text.get('0.0', 'end').rstrip()
         fillcolor = fill_text.get('0.0', 'end').rstrip()
@@ -270,22 +270,21 @@ def setting_():  # 设置界面 | Setting GUI
         default_text = de_text.get('0.0', 'end').rstrip()
         wm_mode = wm_mode_com.get().split('|')[1]
 
-        print(fontcolor, fillcolor, bgcolor, fontstyle, default_text, wm_mode)
-
+#       重设 wm_text 中文本为默认文本 | Reset text in wm_text to default text
         notice_text = '请将水印文本输入到下方' if 'Text' in wm_mode else '请将图片路径输入到下方'
         notice.config(text=notice_text)
 
-        de_text.delete('0.0', 'end')
-        de_text.insert('insert', default_text)
+        wm_text.delete('0.0', 'end')
+        wm_text.insert('insert', default_text)
 
         write_(fontcolor, fillcolor, bgcolor, fontstyle, default_text, wm_mode)
 
         win_set.destroy()
-#	保存按键 | Button to save settings
+#   保存按键 | Button to save settings
     b_save = tk.Button(win_set, text='保存', font=('normal', 16),
                        bg='darkgrey', command=save_)
     b_save.place(relx=0.05, rely=0.85, relwidth=0.4, relheight=0.12)
-#	取消按键 | Button to cancel settings
+#   取消按键 | Button to cancel settings
     b_cancel = tk.Button(win_set, text='取消', font=('normal', 16),
                          bg='darkgrey', command=win_set.destroy)
     b_cancel.place(relx=0.55, rely=0.85, relwidth=0.4, relheight=0.12)
