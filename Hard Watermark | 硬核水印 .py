@@ -14,7 +14,7 @@ from random import randint
             文字颜色  填充颜色   背景颜色    字体风格     默认文字      水印模式
 '''
 def write_(fontcolor, fillcolor, bgcolor, fontstyle, default_text, wm_mode):
-    with open('setting.json', mode='w') as f:  # 保存为 json 文件
+    with open('Setting.json', mode='w') as f:  # 保存为 json 文件
         f.write(json.dumps({
             'fontcolor': fontcolor,
             'fillcolor': fillcolor,
@@ -26,7 +26,7 @@ def write_(fontcolor, fillcolor, bgcolor, fontstyle, default_text, wm_mode):
 # 读取 json 设置文件中内容 | To read contents in the json file
 def read_():
     global fontcolor, fillcolor, bgcolor, fontstyle, default_text, wm_mode
-    with open('setting.json', mode='r') as f:
+    with open('Setting.json', mode='r') as f:
         content = f.read()  # 读取设置数据 | To read settings
 #       把 json 数据转化为 Python 数据 | To transform the json datas into Python datas
         sets = json.loads(content)
@@ -37,6 +37,7 @@ def read_():
         fontstyle = sets['fontstyle']
         default_text = sets['default_text']
         wm_mode = sets['wm_mode']
+
 # 判断设置文件是否存在，不存在则创建，参数为默认参数
 # To judge whether the file exists,or make one and set argument to defaults
 if os.path.isfile('setting.json'):
@@ -72,7 +73,7 @@ class WaterMark:  # 水印窗口的类 | A class of the watermark
             pass
 #       若 ’Fullscreen‘ 在水印模式设置中，则开启全屏背景 | To open fullscreen background if 'Fullscreen' is in wm_mode
         if 'Fullscreen' in wm_mode:
-            background = tk.Tk()
+            background = tk.Toplevel()
             background.config(bg=bgcolor)
 #           全屏显示 | To fullscreen display
             background.attributes('-fullscreen', True)
@@ -80,6 +81,8 @@ class WaterMark:  # 水印窗口的类 | A class of the watermark
             background.bind('<Escape>', lambda event: background.destroy())
 #       创建移动水印窗口 | To make the moving watermark window
         watermark = tk.Toplevel()
+#		将水印置于顶层 | Put the watermark to the top
+        watermark.attributes('-topmost', 1)
 #       隐藏窗口外部 | To hide the decoration of the watermark window
         watermark.overrideredirect(True)
 
