@@ -276,7 +276,7 @@ def setting_():  # 设置界面 | Setting GUI
 #       重设 wm_text 中文本为默认文本 | Reset text in wm_text to default text
         notice_text = '请将水印文本输入到下方' if 'Text' in wm_mode else '请将图片路径输入到下方'
         notice.config(text=notice_text)
-
+#       设置保存时将主窗口中的文本改为已设定的默认文本 | Reset text in main window when settings save
         wm_text.delete('0.0', 'end')
         wm_text.insert('insert', default_text)
 
