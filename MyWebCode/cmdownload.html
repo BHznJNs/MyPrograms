@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>网易云音乐在线下载</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<style>
+			button {cursor: pointer;outline: none}
+			a {user-select: none;}
+			img {user-select: none;}
+
+			.border {border-radius: 1.8vw;
+				border-style: solid;
+				border-color: gray;
+				border-width: 0.2vw;
+			}
+			
+			#img_headline {height: 12.5vh;
+				padding: 1vh 0.625vw
+			}
+			#headline {font-size: 5vw;
+				height: 14.5vh;
+				font-family: Monospace;
+				background-color: #3e516a;
+				color: white;
+				float: right;
+				padding: 1vh 0.625vw;
+			}
+			#main {width: 42%;
+				height: 35vh;
+				float: left;
+				margin: 2vh 3%;
+				box-sizing: border-box;
+			}
+			#songURL {width: 100%;
+				height: 60%;
+				font-size: 2.5vw;
+				box-sizing: border-box;
+				border-radius: 1vw;
+				outline: none;
+				padding: 1vw;
+				transition: 0.3s;
+				-webkit-transition: 0.3s;
+			}
+			#songURL:hover {background-color: #F0F0F0;}
+
+			#submit {display: block;
+				font-size: 2.3vw;
+				margin: 0.5vh 1vw;
+				height: 30%;
+				float: right;
+				border-radius: 1vw;
+				transition: 0.3s;
+				-webkit-transition: 0.3s;
+			}
+			#submit:hover {color:white; background-color:grey;}
+			#submit:active {transition: 0;
+				-webkit-transition: 0;
+				background-color: black;
+			}
+
+			#download {width: 42%;
+				height: 35vh;
+				float: right;
+				margin: 2vh 3%;
+				box-sizing: border-box;
+			}
+			
+			div.chooser {margin: 0 auto;
+			}
+			div.child_chooser {width: 20%;
+				margin: 2vh auto;
+				background-color: #FF9966;
+				padding: 1vw;
+				border-radius: 1.4vw;
+				overflow: hidden;
+				transition: 0.3s;
+				-webkit-transition: 0.3s;
+			}
+			a.chooser {padding: 0.5vw;
+				border-radius: 1vw;
+				cursor: pointer;
+			}
+			a.chooser:hover {opacity:0.6}
+			#chrome {background-color: #99CCFF;
+				float: left;
+			}
+			#firefox {background-color: #FF9966;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="float:left; width:100%">
+			<a href="/"><img id="img_headline" src="{{url_for('static', filename='logos/b_web.png')}}"></a>
+			<a id="headline">BHznJNs的个人网站</a>
+		</div>
+		<hr />
+		<div style="overflow:hidden">
+			<span id="main" class="border">
+				<textarea id="songURL" class="border" placeholder="在此输入歌曲链接" style="resize: none"></textarea>
+				<button id="submit" onclick="gain()">获取</button>
+			</span>
+			<iframe id="download" class="border" src="/"></iframe>
+		</div>
+		<script>
+			var textarea = document.getElementById("songURL")
+			var iframe = document.getElementById("download")
+			function gain() {
+				var url = textarea.value
+				if (url==="") {alert("请输入网址！")
+				} else {
+					songID = url.split("=")[1]
+					iframe.src="https://music.163.com/song/media/outer/url?id=" + songID + ".mp3"
+				}
+			}
+		</script>
+		<hr / style="width:95%; margin:3vh">
+		<div class="chooser">
+			<h2 style="margin:0;text-align:center">使用教程</h2>
+			<div class="child_chooser">
+				<a class="chooser" id="chrome" onclick="changecolor('#FF9966')">Chrome</a>
+				<a class="chooser" id="firefox" onclick="changecolor('#99CCFF')">Firefox</a>
+			</div>
+		</div>
+		<div id="chrome_Tutorials"></div>
+		<div id="firefox_Tutorials"></div>
+		<script>
+			var bg = document.getElementsByClassName("child_chooser")[0]
+			var chrome_Tutorials = document.getElementById("chrome_Tutorials")
+			var firefox_Tutorials = document.getElementById("firefox_Tutorials")
+			function changecolor(color) {
+				bg.style.backgroundColor=color
+			}
+		</script>
+	</body>
+</html>
