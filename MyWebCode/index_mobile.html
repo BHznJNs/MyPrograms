@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>首页-手机端</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<style>
+			/* hidden */
+			div.hidden {
+				width: 60%;
+				height: 100vh;
+				position: fixed;
+				top: 0;
+				left: 120%;
+				overflow: scroll;
+				background-color: white;
+				-webkit-box-shadow:-10px 0px 20px #333333;
+				box-shadow:-10px 0px 20px #333333;
+				transition: 0.8s;
+				-webkit-transition: 0.8s;
+			}
+			img.hidden {
+				width: 100%;
+				padding: 1vmax;
+				box-sizing: border-box;
+				background-color: white;
+			}
+
+			div.main {
+				float: left;
+				width: 100%
+			}
+
+			/* icons */
+			#menu_icon {
+				width: 12vmax;
+				position: fixed;
+				right: 4vw;
+				bottom: 4vh;
+				background-color: darkcyan;
+				border-radius: 6vmax;
+				cursor: pointer;
+			}
+			#return_icon {
+				width: 12vmax;
+				position: fixed;
+				right: -40vw;
+				bottom: 4vh;
+				background-color: darkcyan;
+				border-radius: 6vmax;
+				cursor: pointer;
+				transition: 0.6s;
+				-webkit-transition: 0.6s;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="head"></div>
+			<img id="menu_icon" onclick="show_hidden()" src="{{url_for('static', filename='icons/menu_icon.png')}}"/>
+		</div>
+		<div class="hidden">
+			<img class="hidden" src="{{url_for('static', filename='logos/b_web.png')}}"/>
+			<img id="return_icon" onclick="hide()" src="{{url_for('static', filename='icons/return_icon.png')}}"/>
+			<div style="height: 20vh"></div>
+		</div>
+		<script>
+			var main = document.getElementById("main")
+			var hidden = document.getElementsByClassName("hidden")[0]
+			var return_icon = document.getElementById("return_icon")
+			function show_hidden() {
+				hidden.style.left = "40%"
+				main.style.opacity = 0.4
+				return_icon.style.right = "4vw"
+			}
+			function hide() {
+				hidden.style.left = "120%"
+				main.style.opacity = 1
+				return_icon.style.right = "-40vw"
+			}
+		</script>
+	</body>
+</html>
