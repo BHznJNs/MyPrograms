@@ -1,6 +1,5 @@
 from pykakasi import kakasi
 from janome.tokenizer import Tokenizer
-from pyperclip import copy
 
 # pykakasi
 kks = kakasi()
@@ -34,5 +33,3 @@ def dealwith(jp):
 result = dealwith(input())
 
 print(result)
-# 复制到剪贴板
-copy(result)
