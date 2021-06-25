@@ -4,4 +4,6 @@ for i in range(1, len(origin_list)):
     for j in range(0, len(origin_list) - i):
         if origin_list[j] > origin_list[j+1]:
             origin_list[j], origin_list[j+1] = origin_list[j+1], origin_list[j]
-print(origin_list)  
+print(origin_list)
+
+# list = [1, 2, 3, 4]
