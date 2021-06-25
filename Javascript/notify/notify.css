@@ -1,0 +1,76 @@
+/* 提示框 | Toast */
+div.notification { /* 提示框（toast）展示区 */
+    position: absolute;
+    bottom: 2vh;
+}
+div.notification-right {
+    right: 1vw;
+}
+div.notification-left {
+    left: 1vw;
+}
+
+div.toast {
+    position: relative;
+    max-width: 350px;
+    max-height: 0 !important;
+    font-size: .875rem;
+    font-family: sans-serif;
+    background-color: rgba(255, 255, 255, .85);
+    border: 1px solid #ccc;
+    border-radius: .3rem;
+    box-shadow: 0 .25rem .75rem #ccc;
+    word-wrap: break-word; /* 长单词拆行 */
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 9999;
+    transition: .4s;
+}
+div.toast-active { /* 提示框可视状态 */
+    max-height: 100vh !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+@media screen and (max-width: 800px) {
+    div.toast {max-width: 40vw}
+}
+
+.toast:not(:last-child) {
+    margin-bottom: .6rem;
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: .3rem .75rem;
+    color: #6c757d;
+    background-color: rgba(255, 255, 255, .85);
+    background-clip: padding-box;
+    border-bottom: 1px solid #ccc;
+}
+
+.toast-title {
+    font-weight: bold;
+    user-select: none;
+}
+
+.toast-body {
+    padding: .75rem;
+}
+
+div.toast .close {
+    margin-left: auto;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+    cursor: pointer;
+    user-select: none;
+    opacity: .5;
+    transition: .2s;
+}
+div.toast .close:hover {
+    color: #333 !important;
+}
