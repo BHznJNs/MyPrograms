@@ -30,14 +30,11 @@ title = soup.h1.string.replace("/", "|").replace("{", "\\").replace("}", "\\")
 # 获取页数
 page = soup.find("li", class_="pages").string
 
+print(page)
+
 print("标题 | Title: " + title)
 print("页数 | " + page)
 
-toContinue = input("继续吗？ | Wanna continue? (y / n) ")
-if toContinue == "y":
-	pass
-else:
-	exit(0)
 # 获取图片数
 pageNum = int(page.split(": ")[-1])
 
@@ -53,8 +50,9 @@ def mkdir_(dirName):
 mkdir_("HentaiDL")
 mkdir_("HentaiDL/" + title)
 # 设置下载路径
-DlPath = "HentaiDL/{}/{}".format(title, "{}")
+DlPath = "./HentaiDL/{}/{}".format(title, "{}")
 
+# 函数：图片下载
 def imgDL(url, path, timeout=10):
 	if access(path, F_OK):
 		pass
@@ -64,12 +62,13 @@ def imgDL(url, path, timeout=10):
 		with open(path, "wb") as f:
 			f.write(r.content)
 
+# 函数：获取图片URL
 def getImgURL(id):
 	r = get(VIEW.format(id), timeout=10)
 	soup = BeautifulSoup(r.text, "html.parser")
 
 	img = soup.find("img", id="gimg") # 获取图片元素
-	src = img["src"] # 获取图片URL
+	src = img["data-src"] # 获取图片URL
 
 	# imgDL(src, DlPath.format(src.split("/")[-1]))
 	return src
@@ -113,11 +112,11 @@ def Downloader(dlList):
 		exit(0)
 	else:
 		toDlFailed = input("是否重新下载错误的图片？ | Wanna download imgs failed? (y / n) ")
-		if toDlFailed == "y":
-			failedImg = failed
-			return True
-		else:
-			exit(0)
+		# if toDlFailed == "y":
+		failedImg = failed
+		return True
+		# else:
+			# exit(0)
 
 if len(argv) == 2 and argv[1].isdigit():
 	toContinue = Downloader(range(int(argv[1]), pageNum+1))
