@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # encoding=utf8
+
 import json
 import os.path
 import sys
@@ -13,7 +14,7 @@ from random import randint
             文字颜色  填充颜色   背景颜色    字体风格     默认文字      水印模式
 '''
 def write_(fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode):
-    with open('./Setting.json', mode='w') as f:  # 保存为 json 文件
+    with open('./Settings.json', mode='w') as f:  # 保存为 json 文件
         f.write(json.dumps({
             'fontColor': fontColor,
             'fillColor': fillColor,
@@ -25,7 +26,7 @@ def write_(fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode):
 # 读取 json 设置文件中内容 | To read contents in the json file
 def read_():
     global fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode
-    with open('Setting.json', mode='r') as f:
+    with open('./Settings.json', mode='r') as f:
         content = f.read()  # 读取设置数据 | To read settings
 #       把 json 数据转化为 Python 数据 | To transform the json datas into Python datas
         sets = json.loads(content)
@@ -39,10 +40,12 @@ def read_():
 
 # 判断设置文件是否存在，不存在则创建，参数为默认参数
 # To judge whether the file exists,or make one and set argument to defaults
-if os.path.isfile('setting.json'):
+if os.path.isfile('./Settings.json'):
+    print("Settings.json exist.")
     pass
 else:
     write_('white', 'black', 'black', 'normal', 'Bilibili_BHznJNs', 'Text')
+
 # 创建主窗口 | To turn ip the main window
 window = tk.Tk()
 # 获取屏幕分辨率 | To get the DPI of the screen
