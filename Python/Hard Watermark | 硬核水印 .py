@@ -14,7 +14,7 @@ from random import randint
             文字颜色  填充颜色   背景颜色    字体风格     默认文字      水印模式
 '''
 def write_(fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode):
-    with open('Setting.json', mode='w') as f:  # 保存为 json 文件
+    with open('./Setting.json', mode='w') as f:  # 保存为 json 文件
         f.write(json.dumps({
             'fontColor': fontColor,
             'fillColor': fillColor,
