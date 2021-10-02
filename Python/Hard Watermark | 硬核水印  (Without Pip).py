@@ -3,7 +3,6 @@
 import json
 import os.path
 import sys
-import pyperclip
 import tkinter as tk
 from tkinter import TclError
 from tkinter.ttk import Combobox
@@ -22,7 +21,7 @@ def write_(fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode):
             'fontStyle': fontStyle,
             'defaultText': defaultText,
             'wmMode': wmMode
-            }))
+        }))
 # 读取 json 设置文件中内容 | To read contents in the json file
 def read_():
     global fontColor, fillColor, bgColor, fontStyle, defaultText, wmMode
@@ -204,13 +203,6 @@ window.bind('<Button-2>', lambda event: WaterMark.create_())
 
 def delete_():  # 删除 wm_text 中文本 | To delete text in widget wm_text
     wm_text.delete('0.0', 'end')
-def paste_():  # 粘贴剪贴板 | Paste text into the widget wm_text from clipboard
-    text = pyperclip.paste()
-    wm_text.insert('insert', text)
-def replace_():  # 替换成剪贴板内容 | Get text from clipboard and replace text in widget wm_text
-    delete_()
-    text = pyperclip.paste()
-    wm_text.insert('insert', text)
 
 def setting_():  # 设置界面 | Setting GUI
     read_()
@@ -296,8 +288,6 @@ right_menu = tk.Menu(window, tearoff=0, relief='flat', bg='white', fg='darkgray'
                      activebackground='black', activeforeground='white'
                      )
 right_menu.add_command(label='清空', command=delete_)
-right_menu.add_command(label='粘贴', command=paste_)
-right_menu.add_command(label='替换', command=replace_)
 right_menu.add_command(label='设置', command=setting_)
 
 # 右键点击打开右键菜单 | Press the right key to open the right menu
